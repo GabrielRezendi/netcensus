@@ -1,0 +1,24 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+	<PropertyGroup>
+		<TargetFramework>net6.0</TargetFramework>
+		<Nullable>enable</Nullable>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<UserSecretsId>775905e0-1b9e-4c67-8d68-6cd0c68fa493</UserSecretsId>
+		<DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+	<DockerfileRunEnvironmentFiles>docker.env</DockerfileRunEnvironmentFiles>
+	</PropertyGroup>
+
+	
+	<ItemGroup>
+		<PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.14.0" />
+		<PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+		<PackageReference Include="Swashbuckle.AspNetCore" Version="6.1.5" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\NetCensus.Manager.DAL\NetCensus.Manager.DAL.csproj" />
+		<ProjectReference Include="..\NetCensus.Manager.DTO\NetCensus.Manager.DTO.csproj" />
+	</ItemGroup>
+
+</Project>

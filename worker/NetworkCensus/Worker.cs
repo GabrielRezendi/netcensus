@@ -26,11 +26,19 @@ namespace NetCensus.Worker
 
         public void DoWork()
         {
-            while (true)
+            try
             {
-                SendBasicStats();
-                Thread.Sleep(netCensusConfiguration.SendCadence);
+                while (true)
+                {
+                    SendBasicStats();
+                    Thread.Sleep(netCensusConfiguration.SendCadence);
+                }
             }
+            catch (Exception ex)
+            {
+                Console.WriteLine(DateTime.Now.ToString() + $": Failed to send basic stats to Manager. ERR: {ex.Message}".Pastel(Color.Red));
+            }
+
         }
 
         public void SendBasicStats()
@@ -38,19 +46,19 @@ namespace NetCensus.Worker
             var byteContent = new ByteArrayContent(Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(GetBasicStats())));
             byteContent.Headers.ContentType = new MediaTypeHeaderValue("application/json");
 
-            var request = httpClient.PostAsync(netCensusConfiguration.NetCensusManagerAddress, byteContent);
+            var request = httpClient.PostAsync(netCensusConfiguration.NetCensusManagerAddress + "basicstats", byteContent);
             if (request.Result.IsSuccessStatusCode)
             {
-                Console.WriteLine(DateTime.Now.ToString() + ": Sended basic stats to Manager.".Pastel(Color.Green));
+                Console.WriteLine(DateTime.Now.ToString() + ": Sent basic stats to Manager.".Pastel(Color.Green));
             }
             else
             {
-                Console.WriteLine(DateTime.Now.ToString() + $": Failed to send basic stats to Manager. ERR: {request.Result.Content.ReadAsStringAsync().Result}".Pastel(Color.Green));
+                Console.WriteLine(DateTime.Now.ToString() + $": Failed to send basic stats to Manager. ERR: {request.Result.Content.ReadAsStringAsync().Result}".Pastel(Color.Red));
             }
         }
 
         public BasicStats GetBasicStats()
-        {         
+        {
             hardwareInfo.RefreshDriveList();
             double totalStorage = 0;
             double avaiableStorage = 0;
@@ -70,6 +78,7 @@ namespace NetCensus.Worker
             hardwareInfo.RefreshBIOSList();
             var basicStats = new BasicStats()
             {
+                MachineNickname = netCensusConfiguration.MachineNickname,
                 TotalRam = Convert.ToDouble(hardwareInfo.MemoryStatus.TotalPhysical) / (1024 * 1024 * 1024),
                 AvaiableRam = Convert.ToDouble(hardwareInfo.MemoryStatus.AvailablePhysical) / (1024 * 1024 * 1024),
                 CpuUsage = new List<ulong>(),

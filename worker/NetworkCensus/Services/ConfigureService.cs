@@ -44,10 +44,13 @@ namespace NetCensus.Worker.Services
             NetCensusConfiguration configuration = new NetCensusConfiguration();
 
             Console.Write("> NetCensus Manager Address: ");
-            configuration.MachineName = Console.ReadLine();
+            configuration.NetCensusManagerAddress = Console.ReadLine();
+
+            if (configuration.NetCensusManagerAddress.Last() != '/')
+                configuration.NetCensusManagerAddress += "/";
 
             Console.Write("> Name of the machine (it will be indetified as so in the NetCensus Manager): ");
-            configuration.MachineName = Console.ReadLine();
+            configuration.MachineNickname = Console.ReadLine();
 
             Console.Write("> Sending cadence (in millisencods): ");
             configuration.SendCadence = Convert.ToInt32(Console.ReadLine());

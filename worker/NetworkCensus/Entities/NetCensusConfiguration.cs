@@ -11,7 +11,7 @@ namespace NetCensus.Worker.Entities
         /// <summary>
         /// How the machine will be identified in the NetCensus Manager
         /// </summary>
-        public string MachineName { get; set; }
+        public string MachineNickname { get; set; }
         /// <summary>
         /// Amount of time to be the cadence of request to the API, in milliseconds 
         /// </summary>

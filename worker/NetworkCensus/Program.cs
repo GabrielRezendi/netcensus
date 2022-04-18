@@ -31,8 +31,8 @@ class Program
     static void PrintWelcome(){
         var appConfiguration = GetConfiguration();
 
-        Console.WriteLine("@".Pastel(Color.LightGreen) + "Net".Pastel(Color.White) + "Census".Pastel(Color.LightGreen));
-        Console.WriteLine($"Worker - Version: {appConfiguration["Version"]}".Pastel(Color.Orange));
+        Console.WriteLine("@".Pastel(Color.Green) + "Net".Pastel(Color.White) + "Census".Pastel(Color.Green));
+        Console.WriteLine($"Worker - Version: {appConfiguration["Version"]}".Pastel(Color.White));
         Console.WriteLine("---------------------------------------------------------------- \n");
     }
 

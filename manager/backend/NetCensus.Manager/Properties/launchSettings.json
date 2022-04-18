@@ -1,0 +1,43 @@
+{
+  "$schema": "https://json.schemastore.org/launchsettings.json",
+  "iisSettings": {
+    "windowsAuthentication": false,
+    "anonymousAuthentication": true,
+    "iisExpress": {
+      "applicationUrl": "http://localhost:49443",
+      "sslPort": 44374
+    }
+  },
+  "profiles": {
+    "NetCensus.Manager": {
+      "commandName": "Project",
+      "launchBrowser": true,
+      "launchUrl": "swagger",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "NETCENSUS_CONNECTIONSTRING": "Server=localhost;Database=netcensus;Uid=root;Pwd=seletiva.123;"
+      },
+      "applicationUrl": "https://localhost:7225;http://localhost:5225",
+      "dotnetRunMessages": true
+    },
+    "IIS Express": {
+      "commandName": "IISExpress",
+      "launchBrowser": true,
+      "launchUrl": "swagger",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      }
+    },
+    "Docker": {
+      "commandName": "Docker",
+      "launchBrowser": true,
+      "launchUrl": "{Scheme}://{ServiceHost}:{ServicePort}/swagger",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "NETCENSUS_CONNECTIONSTRING": "Server=localhost;Database=netcensus;Uid=root;Pwd=seletiva.123;"
+      },
+      "publishAllPorts": true,
+      "useSSL": true
+    }
+  }
+}
